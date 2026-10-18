@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS weather_forecasts (
+CREATE TABLE IF NOT EXISTS weather_measurements (
     city_id INT NOT NULL,
     dt BIGINT NOT NULL,
     temp NUMERIC(5, 2),
