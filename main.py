@@ -7,7 +7,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 def run_pipeline():
-    client = WeatherApiClient(url="https://api.openweathermap.org/data/2.5/forecast/daily", api_key=os.environ.get("API_KEY"))
+    client = WeatherApiClient(url="https://api.openweathermap.org/data/2.5/forecast", api_key=os.environ.get("API_KEY"))
     db = DbManager(os.environ.get("CONN_STR"))
 
     cities = ["Budapest", "Rome"]
