@@ -14,8 +14,8 @@ class DbManager():
             raise ValueError("There are no rows to insert")
 
         columns = [
-            "city_id", "dt", "sunrise", "sunset", "temp_day", "temp_min",
-            "temp_max", "pressure", "humidity", "wind_speed", "clouds", "rain"
+            "city_id", "dt", "temp", "feels_like", "pressure",
+            "humidity", "wind_speed", "dt_txt"
         ]
 
         values = [tuple(item[col] for col in columns) for item in data]
