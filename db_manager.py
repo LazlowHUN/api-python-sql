@@ -25,16 +25,13 @@ class DbManager():
             VALUES %s
             ON CONFLICT (city_id, dt)
             DO UPDATE SET
-                sunrise = EXCLUDED.sunrise,
-                sunset = EXCLUDED.sunset,
-                temp_day = EXCLUDED.temp_day,
-                temp_min = EXCLUDED.temp_min,
-                temp_max = EXCLUDED.temp_max,
+                temp = EXCLUDED.temp,
+                feels_like = EXCLUDED.feels_like,
                 pressure = EXCLUDED.pressure,
                 humidity = EXCLUDED.humidity,
                 wind_speed = EXCLUDED.wind_speed,
-                clouds = EXCLUDED.clouds,
-                rain = EXCLUDED.rain;
+                dt_txt = EXCLUDED.dt_txt,
+                created_at = EXCLUDED.created_at;
         """
 
         with psycopg2.connect(self.conn_str) as conn:

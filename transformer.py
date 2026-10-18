@@ -13,16 +13,12 @@ def process_weather_response(raw_json: dict) -> list[dict]:
         record = {
             "city_id": city_id,
             "dt": day_item.dt,
-            "sunrise": day_item.sunrise,
-            "sunset": day_item.sunset,
-            "temp_day": day_item.temp.day,
-            "temp_min": day_item.temp.min,
-            "temp_max": day_item.temp.max,
-            "pressure": day_item.pressure,
-            "humidity": day_item.humidity,
-            "wind_speed": day_item.speed,
-            "clouds": day_item.clouds,
-            "rain": day_item.rain
+            "temp": day_item.main.temp,
+            "feels_like": day_item.main.feels_like,
+            "pressure": day_item.main.pressure,
+            "humidity": day_item.main.humidity,
+            "wind_speed": day_item.wind.speed,
+            "dt_txt": day_item.dt_txt
         }
         processed_records.append(record)
 
