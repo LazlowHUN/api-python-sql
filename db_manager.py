@@ -36,5 +36,5 @@ class DbManager():
 
         with psycopg2.connect(self.conn_str) as conn:
             with conn.cursor() as curs:
-                execute_values(query, values)
+                execute_values(curs, query, values)
                 conn.commit()
