@@ -26,7 +26,7 @@ class WeatherApiClient:
         return session
 
     def fetch_current_weather(self, city: str):
-        params = {"q": city, "cnt": 16, "appid": self.api_key, "units": "metric"}
+        params = {"q": city, "appid": self.api_key, "units": "metric"}
         
         try:
             response = self.session.get(self.url, params=params, timeout=10)
