@@ -49,12 +49,13 @@ class WeatherApiClient:
         
         return lat, lon
 
-    def fetch_current_weather(self, city: str):
+    def fetch_1_min_weather(self, city: str):
         lat, lon = self.get_coordinates(city)
         params = {"lat": lat, "lon": lon, "appid": self.api_key, "units": "metric"}
+        endpoint = f"{self.url}/onecall/timeline/1min"
         
         try:
-            response = self.session.get(self.url, params=params, timeout=10)
+            response = self.session.get(endpoint, params=params, timeout=10)
             response.raise_for_status()
 
             logger.info("Data fetched")
