@@ -25,33 +25,8 @@ class WeatherApiClient:
 
         return session
 
-    def get_coordinates(self, city):
-        endpoint = "http://api.openweathermap.org/geo/1.0/direct"
-        params = {"q": city, "limit": 1, "appid": self.api_key}
-
-        try:
-            response = self.session.get(endpoint, params=params, timeout=10)
-            response.raise_for_status()
-
-            logger.info("Coordinates are fetched")
-            data = response.json()
-        
-        except requests.exceptions.HTTPError as e:
-            logger.exception("HTTP error occurred")
-        except requests.exceptions.RequestException as e:
-            logger.exception("A request error occurred")
-
-        if not data:
-            raise ValueError(f"There are no coordinates for this city: {city}")
-
-        lat = data[0]["lat"]
-        lon = data[0]["lon"]
-        
-        return lat, lon
-
     def fetch_current_weather(self, city: str):
-        lat, lon = self.get_coordinates(city)
-        params = {"lat": lat, "lon": lon, "appid": self.api_key, "units": "metric"}
+        params = {"q": city, "cnt": 16, "appid": self.api_key, "units": "metric"}
         
         try:
             response = self.session.get(self.url, params=params, timeout=10)
