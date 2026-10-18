@@ -27,3 +27,6 @@ def run_pipeline():
     if all_records:
         db.upsert_data(all_records)
         logger.info("Rows inserted")
+
+if __name__ == "__main__":
+    run_pipeline()
