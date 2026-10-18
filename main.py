@@ -20,7 +20,7 @@ def run_pipeline():
 
             record = process_weather_response(raw_data)
 
-            all_records.append(record)
+            all_records.extend(record)
         except Exception as e:
             logger.exception("Something went wrong")
 
