@@ -28,15 +28,17 @@ Designed with a strong focus on software engineering best practices, network res
 ## 📁 Project Structure
 
 ```text
-weather-etl-pipeline/
-├── api_client.py      # WeatherApiClient with custom Session & Retry logic
+api-python-sql/
+├── client.py          # WeatherApiClient with custom Session & Retry logic
 ├── models.py          # Pydantic data validation schemas
+├── transformer.py     # Data transformation and parsing logic
 ├── main.py            # Main pipeline orchestration script
+├── schema.sql         # Database table definitions and constraints
 ├── requirements.txt   # Project dependencies
 ├── docker-compose.yml # PostgreSQL container configuration
 ├── tests/
-│   ├── test_models.py # Unit tests for Pydantic models
-│   └── test_api.py    # Unit tests with mocked API responses
+│   ├── test_models.py # Unit tests for Pydantic models & transformers
+│   └── test_client.py # Unit tests with mocked API responses
 └── .env.example       # Template for environment variables
 ```
 
@@ -93,6 +95,34 @@ Execute the main script to fetch, validate, and store the weather data:
 ```bash
 python main.py
 ```
+
+---
+
+## 🔍 How to Inspect the Database
+
+You can verify that the data has been successfully stored either via the command line or using a graphical database client (such as pgAdmin, DBeaver, or DataGrip).
+
+### Option 1: Via Console (Docker Exec)
+You can directly query the database inside the running Docker container:
+
+```bash
+docker exec -it <container_name_or_id> psql -U postgres -d mydb
+```
+
+Once inside the `psql` prompt, run the following query:
+```sql
+SELECT * FROM weather_forecasts;
+```
+To exit the console, simply type `\q`.
+
+### Option 2: Via GUI Client (pgAdmin / DBeaver)
+Connect to the database using your preferred graphical tool with the following connection details:
+
+* **Host:** `localhost`
+* **Port:** `5433` (as configured in `docker-compose.yml`)
+* **Database:** `mydb`
+* **User:** `myuser`
+* **Password:** `mypassword`
 
 ---
 
