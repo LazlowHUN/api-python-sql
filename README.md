@@ -148,4 +148,4 @@ The database schema and **UPSERT** logic ensure data integrity. Running the pipe
 ---
 
 ## 👤 Author
-Created as part of a professional software engineering portfolio. Feel free to connect or reach out!
+Created as part of a professional data engineering portfolio. Feel free to connect or reach out!
