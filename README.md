@@ -62,12 +62,12 @@ cp .env.example .env
 
 Open the `.env` file and fill in your credentials and API key:
 ```env
-OPENWEATHER_API_KEY=your_actual_api_key_here
-DB_HOST=localhost
-DB_PORT=5433
-DB_NAME=weather_db
-DB_USER=postgres
-DB_PASSWORD=your_secure_password
+API_KEY="apikey12345"
+CONN_STR="postgresql://user:pass@localhost:5432/database_name"
+POSTGRES_USER="myuser"
+POSTGRES_PASSWORD="mypassword"
+POSTGRES_DB="mydb"
+CONN_STR="postgresql://myuser:mypassword@postgres_db:5432/mydb"
 ```
 
 ### 3. Spin Up the Database
