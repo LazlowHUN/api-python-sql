@@ -30,8 +30,7 @@ class DbManager():
                 pressure = EXCLUDED.pressure,
                 humidity = EXCLUDED.humidity,
                 wind_speed = EXCLUDED.wind_speed,
-                dt_txt = EXCLUDED.dt_txt,
-                created_at = EXCLUDED.created_at;
+                dt_txt = EXCLUDED.dt_txt;
         """
 
         with psycopg2.connect(self.conn_str) as conn:
