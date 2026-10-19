@@ -38,6 +38,7 @@ weather-etl-pipeline/
 │   ├── test_models.py # Unit tests for Pydantic models
 │   └── test_api.py    # Unit tests with mocked API responses
 └── .env.example       # Template for environment variables
+```
 
 ---
 
