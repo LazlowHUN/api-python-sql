@@ -38,3 +38,83 @@ weather-etl-pipeline/
 │   ├── test_models.py # Unit tests for Pydantic models
 │   └── test_api.py    # Unit tests with mocked API responses
 └── .env.example       # Template for environment variables
+
+---
+
+## ⚙️ Getting Started
+
+### Prerequisites
+* **Python 3.10** or higher installed on your machine.
+* **Docker** and **Docker Compose** installed and running.
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/weather-etl-pipeline.git
+cd weather-etl-pipeline
+```
+
+### 2. Set Up Environment Variables
+Create a `.env` file in the root directory based on the provided example:
+```bash
+cp .env.example .env
+```
+
+Open the `.env` file and fill in your credentials and API key:
+```env
+OPENWEATHER_API_KEY=your_actual_api_key_here
+DB_HOST=localhost
+DB_PORT=5433
+DB_NAME=weather_db
+DB_USER=postgres
+DB_PASSWORD=your_secure_password
+```
+
+### 3. Spin Up the Database
+Start the PostgreSQL container using Docker Compose:
+```bash
+docker compose up -d
+```
+
+### 4. Install Dependencies
+Install the required Python packages:
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Run the Tests
+Verify that all unit tests pass successfully:
+```bash
+python -m pytest
+```
+
+### 6. Run the ETL Pipeline
+Execute the main script to fetch, validate, and store the weather data:
+```bash
+python main.py
+```
+
+---
+
+## 💡 Engineering Highlights
+
+### Fault Tolerance & Retry Strategy
+Instead of relying on basic, unprotected HTTP requests, the pipeline wraps communication in a robust session using `urllib3` retries:
+
+```python
+retries = Retry(
+    total=5,
+    backoff_factor=2,
+    status_forcelist=[500, 502, 503, 504],
+    raise_on_status=False
+)
+adapter = HTTPAdapter(max_retries=retries)
+session.mount('https://', adapter)
+```
+
+### Idempotency & Immutable Timestamps
+The database schema and **UPSERT** logic ensure data integrity. Running the pipeline multiple times will update current metrics safely while preserving the exact moment a record was first discovered (`created_at` remains untouched on conflicts).
+
+---
+
+## 👤 Author
+Created as part of a professional software engineering portfolio. Feel free to connect or reach out!
